@@ -9,3 +9,10 @@
   margin-bottom: 20px;
   
 }
+body{
+  background-color: #f5f6fa;
+}
+.app__stats{
+  display: flex;
+  justify-content: space-between;
+}

@@ -2,12 +2,16 @@ import { useState , useEffect } from 'react';
 import React from 'react';
 import { FormControl, MenuItem, Select } from '@material-ui/core';
 import './App.css';
+import InfoBox from './InfoBox';
+
 
 function App() {
   
   // state is variable in react or short term memory
 
   const [countries,setCountries] = useState([]);
+
+  const [country,setCountry] = useState('worldwide');
 
   // useEffect run's peace of code on given conditiion
   useEffect(()=>{
@@ -32,6 +36,13 @@ function App() {
 
   },[]);
 
+
+  const onCountryChange = async (event) =>{
+    const countryCode = event.target.value;
+    
+    setCountry(countryCode);
+  }
+
   return (
     // BEM naming convention
     <div className="app">
@@ -41,14 +52,11 @@ function App() {
           <FormControl className='app__dropdown'>
             <Select
               variant='outlined'
-              value="abc"
+              value={country}
+              onChange = {onCountryChange}              
             >
               {/* loop through contries show dropdown list and also add worldwide */}
-              {/* <MenuItem value="worldwide" >worldwide1</MenuItem>
-              <MenuItem value="worldwide" >worldwide2</MenuItem>
-              <MenuItem value="worldwide" >worldwide3</MenuItem>
-              <MenuItem value="worldwide" >worldwide4</MenuItem> */}
-            
+              <MenuItem value='worldwide'>Worldwide</MenuItem>
               {
                 countries.map((country) =>(
                   <MenuItem value={country.value} >{country.name}</MenuItem>
@@ -60,6 +68,16 @@ function App() {
 
         </FormControl>
       </div>
+
+      <div className='app__stats'>
+
+        <InfoBox title="Coronavirus cases" cases={129} total={2000} />
+        <InfoBox title="Recovered" cases={134} total={300} />
+        <InfoBox title="Deaths" cases={149} total={40} />
+
+      </div>
+
+
         {/* Header */}
         {/* Title + select input dropdown list */}
 
